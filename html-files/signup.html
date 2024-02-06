@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width
+    , initial-scale=1.0">
+    <link rel="stylesheet" href="/css-files/login-signup.css" type="text/css">
+    <title>התחברות</title>
+</head>
+<body>
+
+    <form>
+
+        <h1>הרשמה</h1>
+            <div>
+                <input type="text" id="username" pattern="([A-Za-z]+)|([א-ת]+)"
+                title=" הכנס שם משתמש ללא רווחים"
+                placeholder="שם משתמש" required>
+               
+            </div>
+            <div>
+                <input type="email" id="email" placeholder="אימייל" required>
+           
+            </div>
+            <div>
+                <input type="password" id="password" placeholder="סיסמה" required
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W)[a-zA-Z\d\W]{10}$" 
+                title="חובה להכיל לפחות שתי אותיות קטנות, אות גדולה, ספרה ותו מיוחד, ובסך הכול 10 תווים">
+                
+            </div>
+
+            <div class="agree-terms">
+                <input id="agree-terms" type="checkbox" required>
+                <label for="agree-terms">הריני מאשר/ת כי קראתי והבנתי את מדיניות הפרטיות ותנאי השימוש.</label>
+            </div>
+            
+           <div>
+                <button type="submit">צור חשבון</button>
+                <a href="/html-files/login.html">משתמש רשום? התחבר עכשיו</a>
+            </div>
+           
+ 
+           
+    </form>
+    
+ 
+ </body>
+</html>
