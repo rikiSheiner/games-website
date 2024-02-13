@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ציפור מעופפת</title>
+    <link rel="stylesheet" href="/flappy-bird/flappy-bird.css">
+    <link rel="stylesheet" href="/css-files/scores-table.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+
+</head>
+<body >
+    <div>
+        <embed src="/html-files/navigation-bar.html">
+    </div>
+    <div><h1>ציפור מעופפת🐦</h1></div>
+    <div onclick="jump()">
+        <div id="game">
+            <div id="pipe1" class="obs"></div>
+            <div id="pipe2" class="obs"></div>
+            <div id="bird"><img src="birdf.png"></div>
+            <div id="score">SCORE: <span id="scr">0</span></div>
+
+        </div>
+    </div>
+
+    <h2 id="results"></h2>
+    <button id="play-again">שחק שוב</button>
+
+ 
+    <button id="display-scores-btn">הסתר הישגים</button>
+    <div id="table-container">
+        <table id="scores-table">
+            <thead>
+                <tr>
+                  <th>שם</th>
+                  <th>הישגים</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+        </table>
+    </div>
+
+    <script src="/flappy-bird/flappy-bird.js"></script>
+    
+</body>
+</html>
