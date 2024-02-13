@@ -17,6 +17,7 @@ function signUp(){
     if(!exist){
         console.log("החשבון נוצר בהצלחה");
 
+        // נשמור באחסון מקומי את פרטי המשתמש
         usersDetails.push({ username, email, password });
         localStorage.setItem('usersDetails', JSON.stringify(usersDetails));
         document.querySelector('form').reset();

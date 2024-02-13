@@ -8,6 +8,10 @@ body{
     */
 }
 
+button:hover{
+    cursor: pointer;
+}
+
 #bg-img{
     height: 100%;
     width: 100%;
@@ -105,6 +109,4 @@ input[type="password"]{
     background-position: 5% center;
     background-repeat: no-repeat;
     background-size: 8%;
-    
-    
 }
