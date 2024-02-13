@@ -3,24 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="/css-files/support.css" type="text/css">
     <title>תמיכה</title>
+
 </head>
 <body>
+    <div>
+        <embed src="/html-files/navigation-bar.html">
+    </div>
+
+    <h1>קבל עזרה</h1>
+    
     <form action="">
-       
-        <br><br>
-        <input type="text" id="fname" placeholder="שם פרטי" title="הכנס שם פרטי" pattern="[א-ת]+" required>
-        <input type="text" id="lname" placeholder="שם משפחה" title="הכנס שם משפחה" pattern="[א-ת]+"  required>
-        <label for="email">דואר אלקטרוני:</label>
-        <input type="email" id="email" name="email"  placeholder=" אימייל"  Require>
-        <br><br>
-        <textarea placeholder="הכנס טקסט כאן..."></textarea>
-        <select id="supportIssue" name="supportIssue">
-            <option value="login">בעיה בהתחברות</option>
-            <option value="payment">בעיה בתשלום</option>
-            <option value="gameplay">בעיה בפעולת המשחק</option>
-            <option value="technical">בעיה טכנית אחרת</option>
-          </select>
-        </form>
+        <div>
+            <input type="text" id="fname" placeholder="שם פרטי" title="הכנס שם פרטי" pattern="[א-ת]+" required>
+
+        </div>
+
+        <div>
+            <input type="text" id="lname" placeholder="שם משפחה" title="הכנס שם משפחה" pattern="[א-ת]+"  required>
+        </div>    
+
+        <div>
+            <input type="email" id="email" name="email"  placeholder=" אימייל"  Require>
+            
+        </div>
+        
+        <div>
+            
+            <select id="supportIssue" name="supportIssue">
+                <option value="login">בעיה בהתחברות</option>
+                <option value="payment">בעיה בתשלום</option>
+                <option value="gameplay">בעיה בפעולת המשחק</option>
+                <option value="technical">בעיה טכנית אחרת</option>
+            </select>
+        </div>
+
+        <div>
+            <textarea placeholder="תאר בקצרה את התקלה"></textarea>
+        </div>
+
+        <div>
+            <input type="submit"></input>
+        </div>
+    </form>
+    <script src="/js-files/support.js" type="text/javascript"></script>
+
 </body>
 </html>

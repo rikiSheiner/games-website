@@ -4,33 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,
     , initial-scale=1.0">
-    <title>הרשמה</title>
+    <title>התחברות</title>
     <link rel="stylesheet" href="/css-files/login-signup.css" type="text/css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
 
-    <link rel="stylesheet" href="/css-files/login.css" type="text/css">
 </head>
 <body>
-    <form>
+    <main>
         <h1>התחברות</h1>
-        
-        <div class="username-box">
-            <!--label for="username" >שם משתמש</label-->
-            <input id="username" type="text" placeholder="שם משתמש" required>
-        </div>
+        <form id="login-form" autocomplete="off" >
+            <div class="username-box">
+                <!--label for="username" >שם משתמש</label-->
+                <input id="username" type="text" placeholder="שם משתמש" autocomplete="off" required>
+            </div>
+            <div class="password-box">
+                <!--label for="password" >סיסמה</label-->
+                <input id="password" type="password" placeholder="סיסמה" autocomplete="off" required>
+                <a id="forgot-password" >שכחת סיסמה?</a>
+            </div>       
+            <div>
+                <button id="login-btn" type="submit" >התחבר</button>
+                <a id="signup" href="/html-files/signup.html">עוד לא נרשמתם? הרשמו עכשיו</a>
+            </div>  
+        </form>
+    </main>
+    
+    <script type="text/javascript" src="/js-files/login.js"></script>
 
-        <div class="password-box">
-            <!--label for="password" >סיסמה</label-->
-            <input id="password" type="password" placeholder="סיסמה" required>
-            <a id="forgot-password" href="">שכחת סיסמה?</a>
-
-        </div>       
-
-        
-        <div>
-            <button id="login" type="submit">התחבר</button>
-            <a id="signup" href="/html-files/signup.html">עוד לא נרשמתם? הרשמו עכשיו</a>
-        </div>
-        
-    </form>
 </body>
 </html>
