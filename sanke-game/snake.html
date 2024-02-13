@@ -1,14 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snake Game</title>
+    <title>הנחש</title>
     <link rel="stylesheet" href="/sanke-game/snake.css" type="text/css">
+    <link rel="stylesheet" href="/css-files/scores-table.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+
 </head>
 <body>
-    <h1>Snake</h1>
-    <canvas id="board"></canvas>
+    <div>
+        <embed src="/html-files/navigation-bar.html">
+    </div>
+
+    <h1>הנחש 🐍</h1>
+    <canvas id="board" ></canvas>
+
+    <h2 id="results"></h2>
+    <button id="play-again">שחק שוב</button>
+
+
+    <button id="display-scores-btn">הסתר הישגים</button>
+    <div id="table-container">
+        <table id="scores-table">
+            <thead>
+                <tr>
+                  <th>שם</th>
+                  <th>הישגים</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+        </table>
+    </div>
+
     <script src="/sanke-game/snake.js"></script>
 </body>
 </html>

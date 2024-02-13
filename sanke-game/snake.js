@@ -41,7 +41,38 @@ var foodY;
 // האם המשחק נגמר
 var gameOver = false;
 
+// הוספת אירוע הצגת הישגי המשחק 
+// כשלוחצים על הכפתור תתעדכן התצוגה של טבלת 
+// ההישגים בהתאם למה שהיה לפני הלחיצה
+let showScoresBtn = document.getElementById('display-scores-btn');
+showScoresBtn.addEventListener('click', function(){
+    // עדכון התצוגה של טבלת ההישגים
+    let scoresTable = document.querySelector('#scores-table');
+    let tableDisplay = scoresTable.style.display;    
+    scoresTable.style.display = tableDisplay === 'none' ? 'block' : 'none';
 
+    // עדכון התוכן של הכפתור
+    if(showScoresBtn.innerHTML === 'צפה בהישגים'){
+        showScoresBtn.innerHTML = 'הסתר הישגים'
+    }
+    else{
+        showScoresBtn.innerHTML = 'צפה בהישגים'
+    }
+});
+
+// עדכון טבלת ההישגים של המשתתפים במשחק
+updateScoresTable('snake');
+
+// אם רוצים לשחק שוב צריך לעדכן את התצוגה בהתאם
+document.querySelector("#play-again").addEventListener("click", ()=>{
+    gameOver = false;
+    document.querySelector("#results").innerHTML = "";
+    document.querySelector("#play-again").style.display = "none";
+
+    window.location.reload();
+});
+
+let updateInterval;
 window.onload = function() {
     board = document.getElementById("board");
     // קביעת הגודל של לוח המשחק
@@ -57,8 +88,37 @@ window.onload = function() {
     
     // צריך לעדכן את הלוח כל רגע במהלך המשחק
     // בהתאם לפעולות שהשחקן מבצע
-    setInterval(update, 1000/10);
+    updateInterval = setInterval(update, 1000/10);
 }
+
+function drawImageCover(ctx, img, x, y, w, h) {
+    // Calculate the best-fitting size for the image
+    // (maximizes size while preserving aspect ratio)
+    // First, calculate the ratios of canvas to image dimensions
+    let imgRatio = img.width / img.height;
+    let canvasRatio = w / h;
+
+    let drawWidth, drawHeight, offsetX, offsetY;
+
+    // Determine whether to fill vertically or horizontally
+    if (imgRatio < canvasRatio) {
+        // Image is narrower than canvas, so fill horizontally
+        drawWidth = w;
+        drawHeight = w / imgRatio;
+        offsetX = 0;
+        offsetY = -(drawHeight - h) / 2;
+    } else {
+        // Image is wider than canvas, so fill vertically
+        drawHeight = h;
+        drawWidth = h * imgRatio;
+        offsetX = -(drawWidth - w) / 2;
+        offsetY = 0;
+    }
+
+    // Draw the image on canvas
+    ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+}
+
 
 // הפונקציה הזאת משמשת בשביל לצבוע את הלוח 
 function update(){
@@ -66,11 +126,12 @@ function update(){
 
     //סיום המשחק 
     if(gameOver){
+        clearInterval(updateInterval);
         return;
     }
 
     // צביעה של כל הלוח בשחור
-    context.fillStyle = "black";
+    context.fillStyle = "#1a9c27";
     context.fillRect(0,0,board.width, board.height);
 
    //צביעה של המשבצת של האוכל
@@ -96,7 +157,7 @@ function update(){
     }
 
     // צביעה של הריבוע שבו ממוקם ראש הנחש
-    context.fillStyle = "lime";
+    context.fillStyle = "yellow";
     snakeX += velocityX * blockSize;
     snakeY += velocityY * blockSize;
     context.fillRect(snakeX, snakeY, blockSize, blockSize);
@@ -111,14 +172,29 @@ function update(){
     // הנחש יצא מהגבולות של הלוח
     if(snakeX < 0 || snakeY > cols * blockSize || snakeY < 0 || snakeY > rows * blockSize){
         gameOver = true;
-        alert("Game Over!");
+        alert("המשחק נגמר!");
+        
+        // שמירת הניקוד של המשתמש במשחק
+        let score = snakeBody.length + 1;
+        saveUserScore('snake', score);
+
+        // הוספת אפשרות לשחק שוב
+        document.querySelector("#play-again").style.display = "inline";
 
     }
 
     // הנחש נתקע בגוף של עצמו
     for(let i = 0; i < snakeBody.length; i++){
         if(snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]){
-            alert("Game Over!");
+            alert("המשחק נגמר!");
+
+            // שמירת הניקוד של המשתמש במשחק
+            let score = snakeBody.length + 1;
+            saveUserScore('snake', score);
+            
+            // הוספת אפשרות לשחק שוב
+            document.querySelector("#play-again").style.display = "inline";
+
         }
     }
  }
@@ -151,3 +227,72 @@ function placeFood(){
 
 }
 
+// שמירה של הניקוד עבור משתמש זה
+function saveUserScore(gameName, gameScore){
+    // יש לנו טבלת ניקוד לכל המשחקים ביחד
+    // שבה שמורה רשומה לכל משחק
+    // המפתח הוא שם המשחק
+    // והערך הוא רשימה שמכילה רשומות של ניקוד לכל משתמש
+
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const allScores = JSON.parse(localStorage.getItem('allScores')) || {};
+    
+    // נבדוק האם לא שמרנו ניקוד בעבר עבור משחק זה
+    if(!allScores[gameName]){
+        // ניצור רשימת ניקוד עבור משחק זה
+        allScores[gameName] = {};
+    }
+
+    
+    // בדיקה האם משתמש זה לא שיחק במשחק זה
+    if(!allScores[gameName][currentUser.username] ){
+        // שמירה של ניקוד המשתמש במשחק
+        allScores[gameName][currentUser.username] = [gameScore];
+    }
+    else{
+        // שמירה של ניקוד המשתמש במשחק
+        allScores[gameName][currentUser.username].push(gameScore);
+    }
+    
+    // עדכון רשימת ההישגים של המשתמש במשחק זה
+    localStorage.setItem("allScores", JSON.stringify(allScores));
+
+    // עדכון טבלת ההישגים של המשתתפים במשחק
+     updateScoresTable('snake');
+}
+
+// מטרת הפונקציה היא לעדכן את טבלת ההישגים של המשחק
+// בהתאם להישגי המשתתפים במשחק עד כה
+function updateScoresTable(gameName){
+
+    const scoresTableBody = document.querySelector("#scores-table tbody");
+
+    scoresTableBody.innerHTML = "";
+
+    const scores = JSON.parse(localStorage.getItem('allScores')) || {};
+    let scoresGame = scores[gameName];
+    
+    if(scoresGame){    
+        scoresTableBody.parentElement.style.display = 'block';
+        const sortedKeys = Object.keys(scoresGame).sort();
+  
+        sortedKeys.forEach(key => {
+          const values = scoresGame[key];
+          const row = document.createElement("tr");
+          
+          const keyCell = document.createElement("td");
+          keyCell.textContent = key;
+          row.appendChild(keyCell);
+          
+          const valueCell = document.createElement("td");
+          valueCell.textContent = values.join("  ");
+          row.appendChild(valueCell);
+          
+          scoresTableBody.appendChild(row);
+        });
+      
+    }
+    else{
+        scoresTableBody.parentElement.style.display = 'none';
+    }
+}

@@ -1,5 +1,47 @@
 body{
-    font-family: 'Courier New', Courier, monospace;
     text-align: center;
+    background-color: rgb(191, 161, 219);;
 }
 
+*{
+    font-family: 'Courier New', Courier, monospace;
+}
+embed{
+    width: 100%;
+    display: block;
+    z-index: 1;
+}
+
+canvas{
+    border: 30px dashed #964213;
+}
+
+h1{
+    margin-top: -20px;
+    font-size: 3rem;
+    color: rgb(95, 40, 146);
+
+}
+
+#scores-table{
+    display: none;
+}
+
+#play-again{
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: none;
+    margin-top: 20px;
+    color: white;    
+    background-color: rgb(95, 40, 146);
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 20px auto;
+}
+
+#play-again:hover{
+    padding: 10px 40px;
+    background-color: #08D9D6;
+    color: #000;
+}
