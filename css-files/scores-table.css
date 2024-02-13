@@ -1,0 +1,56 @@
+#display-scores-btn{
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: none;
+    margin-top: 20px;
+    color: white;    
+    background-color: rgb(95, 40, 146);
+    font-size: 1.8rem;
+    font-weight: bold;
+    display: block;
+    margin: 20px auto;
+    width: 20%;
+}
+
+
+#display-scores-btn:hover{
+    padding: 10px 40px;
+    background-color: #08D9D6;
+    color: #000;
+}
+
+#table-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+}
+
+#scores-table{
+    /*display: none;*/
+    max-width: 100%;
+    margin-bottom: 50px;
+    margin-top: 20px;
+}
+
+table{
+    font-size: 1.5rem;
+}
+
+table, th, td{
+    border: 2px solid rgb(95, 40, 146);
+
+}
+
+th{
+    background-color: rgb(95, 40, 146);
+    color: white;
+    width: 200px;
+}
+
+td{
+    color:rgb(95, 40, 146);
+    width: 200px;
+    font-weight: bold;
+}

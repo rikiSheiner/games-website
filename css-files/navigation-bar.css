@@ -1,4 +1,4 @@
-div{
+nav{
     direction: rtl;
     display: flex;
     flex-direction: row;
@@ -10,7 +10,7 @@ div{
 
 img{
     height: 100%;
-    width: 15%;
+    width: 50%;
     background-color: transparent;
     align-self: center;
 }
@@ -31,12 +31,8 @@ input{
     font-size: 1.2rem;
     align-self: center;
     border-radius: 18px;
-    /*color: white;
-    background-color: rgb(134, 101, 165);*/
-    
     background-color: white;
     color: rgb(95, 40, 146);
-    
     background-image: url('/images/search-icon.png');
     background-position: 5% center;
     background-repeat: no-repeat;
@@ -51,4 +47,8 @@ a{
     margin-left: 20px;
     font-weight: bold;
     color: white
+}
+
+#home-page{
+    margin-left: 0;
 }
