@@ -1,21 +1,38 @@
 body{
-    font-family: Arial, Helvetica, sans-serif;
     text-align: center;
-    background: url('/whack-a-mole/mario-bg.jpg');
-    background-size: cover;
+    background-color: rgb(191, 161, 219);;
+}
+
+*{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+h1, h2{
+    margin-top: -20px;
+    font-size: 3rem;
+    color: rgb(95, 40, 146);
+}
+
+h2{
+    font-size: 2.5rem;
+}
+
+embed{
+    width: 100%;
+    display: block;
+    z-index: 1;
 }
 
 #board{
     height: 540px;
     width: 540px;
-
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
 
     background: url(/whack-a-mole/soil.png);
     background-size: cover;
-    border: 3px solid white;
+    border: 10px solid white;
     border-radius: 25px;
 
 }
@@ -37,4 +54,23 @@ body{
     -webkit-user-drag: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+}
+
+#play-again{
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: none;
+    margin-top: 20px;
+    color: white;    
+    background-color: rgb(95, 40, 146);
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 20px auto;
+}
+
+#play-again:hover{
+    padding: 10px 40px;
+    background-color: #08D9D6;
+    color: #000;
 }

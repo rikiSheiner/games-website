@@ -1,15 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Whack a Mole</title>
     <link rel="stylesheet" href="/whack-a-mole/whack-a-mole.css">
+    <link rel="stylesheet" href="/css-files/scores-table.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+
 </head>
 <body>
-    <h1>Whack a Mole</h1>
+
+    <div>
+        <embed src="/html-files/navigation-bar.html">
+    </div>
+
+    <h1>תפוס את החפרפרת 🦫</h1>
     <h2 id="score">0</h2>
     <div id="board"></div>
+
+    <h2 id="results"></h2>
+    <button id="play-again">שחק שוב</button>
+
+
+    <button id="display-scores-btn">הסתר הישגים</button>
+    <div id="table-container">
+        <table id="scores-table">
+            <thead>
+                <tr>
+                  <th>שם</th>
+                  <th>הישגים</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+        </table>
+    </div>
+
     <script src="/whack-a-mole/whack-a-mole.js"></script>
 </body>
 </html>
