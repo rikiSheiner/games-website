@@ -14,10 +14,6 @@ form.onsubmit = function () {
     else form.action = '';
 };
 
-/*let forgotPassword = document.getElementById('forgot-password');
-forgotPassword.addEventListener('click', alert('נשלח אליך למייל קישור לאיפוס סיסמה.'));
-*/
-
 // המשתמש יהיה חסום לדקה
 const BLOCK_TIME = 60000; 
 

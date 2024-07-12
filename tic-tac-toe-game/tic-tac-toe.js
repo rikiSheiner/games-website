@@ -1,4 +1,5 @@
 
+// כל המשבצות שיש בלוח
 let boxes = document.querySelectorAll(".box");
 
 let turn = "X";
