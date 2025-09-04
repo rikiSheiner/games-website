@@ -160,6 +160,27 @@ function update(){
     context.fillStyle = "yellow";
     snakeX += velocityX * blockSize;
     snakeY += velocityY * blockSize;
+
+    // לפני שנצבע נבדוק אם יש שינוי מיקום 
+    
+    // שדרוג 1 - במקום שיציאה מגבולות הלוח תוביל לפסילה 
+    // נמקם את הנחש בקצה השני של  הלוח 
+
+    if(snakeX < 0){ //  מקרה א - חריגה שמאלה  
+        snakeX = (cols - 1) * blockSize;
+    }
+    else if(snakeX >= cols * blockSize){ // מקרה ב - חריגה ימינה
+        snakeX = 0;
+    }
+    else if(snakeY < 0){ // מקרה ג - חריגה למעלה
+        snakeY = (rows - 1) * blockSize;
+    }
+    else if(snakeY >= rows * blockSize){ // מקרה ד - חריגה למטה 
+        snakeY = 0;
+    }
+
+    // נצבע בהתאם למיקום המעודכן
+    context.fillStyle = "yellow";
     context.fillRect(snakeX, snakeY, blockSize, blockSize);
 
     // צביעה של כל הריבועים שבהם ממוקם גוף הנחש
@@ -168,20 +189,6 @@ function update(){
     }
 
     //תנאים לסיום המשחק
-
-    // הנחש יצא מהגבולות של הלוח
-    if(snakeX < 0 || snakeY > cols * blockSize || snakeY < 0 || snakeY > rows * blockSize){
-        gameOver = true;
-        alert("המשחק נגמר!");
-        
-        // שמירת הניקוד של המשתמש במשחק
-        let score = snakeBody.length + 1;
-        saveUserScore('snake', score);
-
-        // הוספת אפשרות לשחק שוב
-        document.querySelector("#play-again").style.display = "inline";
-
-    }
 
     // הנחש נתקע בגוף של עצמו
     for(let i = 0; i < snakeBody.length; i++){
