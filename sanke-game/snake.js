@@ -229,8 +229,28 @@ function changeDirection(e){
 // פונקציה בשביל למקם את האוכל במיקום אקראי בלוח
 function placeFood(){
     // (0-1) * cols => (0,19) * 25
-    foodX = Math.floor(Math.random() * cols) * blockSize;
+    /*foodX = Math.floor(Math.random() * cols) * blockSize;
     foodY = Math.floor(Math.random() * rows) * blockSize;
+    */
+
+    // שדרוג 2 - במיקום האוכל נוודא שאינו על גוף הנחש
+
+    // מציאת כל המיקומים הריקים בלוח
+    let possiblePlaces = [];
+    for (let c = 0; c < cols; c++) {
+        for (let r = 0; r < rows; r++) {
+            let isFull = snakeBody.some(el => el[0] === c * blockSize && el[1] === r * blockSize);
+            if (!isFull) {
+                possiblePlaces.push([c * blockSize, r * blockSize]);
+            }
+        }
+    }
+
+    // בחירת מיקום מהריקים
+    if (possiblePlaces.length > 0) {
+        let randomIndex = Math.floor(Math.random() * possiblePlaces.length);
+        [foodX, foodY] = possiblePlaces[randomIndex];
+    }
 
 }
 
