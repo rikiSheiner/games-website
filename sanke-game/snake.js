@@ -9,6 +9,8 @@
 
 */
 
+// משחק הנחש עם אפשרות של ריבוי מאכלים
+
 // הלוח
 var blockSize = 25; // מה הגודל של כל משבצת בלוח (רוחב וגובה של כל ריבוע בלוח)
 var rows = 20; // כמה שורות יש בלוח
@@ -35,8 +37,13 @@ var snakeBody = []
 
 // food
 // קביעת מיקום האוכל בלוח
+// במקרה של ריבוי מאכלים נצטרך לשמור מערך מיקומי מאכלים
+// ובנוסף נגדיר משתנה כמות המאכלים
+const NUM_FOODS = 5;
+var foodPlaces =[]
 var foodX; 
 var foodY;
+
 
 // האם המשחק נגמר
 var gameOver = false;
@@ -80,8 +87,10 @@ window.onload = function() {
     board.width = cols * blockSize;
     context = board.getContext("2d"); // משמש בשביל לצייר על הלוח
 
-    // מיקום האוכל בלוח
-    placeFood();
+    // נמקם את המאכלים בלוח
+    for(let i = 0; i < NUM_FOODS; i++){
+        placeFood(i);
+    }
 
     // הוספת מאזין לאירוע שינוי כיוון של הנחש
     document.addEventListener("keyup", changeDirection);
@@ -134,15 +143,21 @@ function update(){
     context.fillStyle = "#1a9c27";
     context.fillRect(0,0,board.width, board.height);
 
-   //צביעה של המשבצת של האוכל
+   //צביעה של המשבצות של האוכל
    context.fillStyle = "red";
-   context.fillRect(foodX, foodY, blockSize,blockSize);
+   for(let i = 0; i < NUM_FOODS; i++){
+        [foodX, foodY] = foodPlaces[i];
+        context.fillRect(foodX, foodY, blockSize, blockSize);
+   }
     
    // הגדלה של גוף הנחש כשהוא מצליח לתפוס אוכל
-    if(snakeX == foodX && snakeY == foodY){
-        snakeBody.push([foodX, foodY]);
-        // קביעת מיקום חדש של האוכל בלוח
-        placeFood();
+    for(let i = 0; i < NUM_FOODS; i++){
+        [foodX, foodY] = foodPlaces[i];
+        if(snakeX == foodX && snakeY == foodY){
+            snakeBody.push([foodX, foodY]);
+            // קביעת מיקום חדש של האוכל בלוח
+            placeFood(i);
+        }
     }
 
     // מעדכנים את המיקומים של גוף הנחש 
@@ -227,16 +242,16 @@ function changeDirection(e){
 }
 
 // פונקציה בשביל למקם את האוכל במיקום אקראי בלוח
-function placeFood(){
+function placeFood(currIndex){
     // (0-1) * cols => (0,19) * 25
-    /*foodX = Math.floor(Math.random() * cols) * blockSize;
-    foodY = Math.floor(Math.random() * rows) * blockSize;
-    */
 
     // שדרוג 2 - במיקום האוכל נוודא שאינו על גוף הנחש
 
     // מציאת כל המיקומים הריקים בלוח
+    // צריך לבדוק שהמיקומים אינם מיקומי נחש או מיקומי מאכלים אחרים
     let possiblePlaces = [];
+    
+    // סינון מיקומי נחש
     for (let c = 0; c < cols; c++) {
         for (let r = 0; r < rows; r++) {
             let isFull = snakeBody.some(el => el[0] === c * blockSize && el[1] === r * blockSize);
@@ -246,10 +261,15 @@ function placeFood(){
         }
     }
 
+    // סינון מיקומי מאכלים
+    possiblePlaces = possiblePlaces.filter(([x1, y1]) => 
+        !foodPlaces.some(([x2, y2]) => x1 === x2 && y1 === y2));
+
+    // עבור המאכל שנאכל נמצא מיקום חדש 
     // בחירת מיקום מהריקים
     if (possiblePlaces.length > 0) {
         let randomIndex = Math.floor(Math.random() * possiblePlaces.length);
-        [foodX, foodY] = possiblePlaces[randomIndex];
+        foodPlaces[currIndex] = possiblePlaces[randomIndex];
     }
 
 }
